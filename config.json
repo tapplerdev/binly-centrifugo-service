@@ -1,4 +1,6 @@
 {
+  "engine": "redis",
+  "redis_address": "${REDIS_URL}",
   "client": {
     "token": {
       "hmac_secret_key": "ln6thWwgHykwjkjXl-BIHPh4_b77yyCeJHey_2_kFR2wP2C3AkmyVhrUFERxdEojzwLq-3JeM-z9to4GdBpEzg"
