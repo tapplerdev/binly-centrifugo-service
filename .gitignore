@@ -1,0 +1,13 @@
+# Railway
+.railway
+
+# macOS
+.DS_Store
+
+# Local development overrides
+config.local.json
+*.local.json
+
+# Secrets (never commit!)
+.env
+.env.local
