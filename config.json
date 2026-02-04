@@ -4,6 +4,7 @@
   "admin_password": "YourStrongPassword123!",
   "admin_secret": "937d9c4fd61eda5bc8359b60db93a97e",
   "api_key": "edbe666f2fc6596a951ae6fac954e5fb6be4440b8d7cbe3f8bbe6419f7f5ecda",
+  "api_insecure": true,
   "allowed_origins": ["*"],
   "health": true,
   "proxy_subscribe_endpoint": "https://ropacal-backend-production.up.railway.app/api/centrifugo/subscribe",
