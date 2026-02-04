@@ -19,7 +19,6 @@
   "channel": {
     "proxy": {
       "subscribe": {
-        "enabled": true,
         "endpoint": "https://ropacal-backend-production.up.railway.app/api/centrifugo/subscribe",
         "timeout": "5s"
       }
@@ -32,8 +31,7 @@
         "force_recovery_mode": "cache",
         "history_size": 10,
         "history_ttl": "300s",
-        "allow_subscribe_for_client": false,
-        "proxy_subscribe": true
+        "subscribe_proxy_enabled": true
       },
       {
         "name": "shift",
@@ -41,8 +39,7 @@
         "force_recovery": true,
         "history_size": 5,
         "history_ttl": "120s",
-        "allow_subscribe_for_client": false,
-        "proxy_subscribe": true
+        "subscribe_proxy_enabled": true
       },
       {
         "name": "manager",
@@ -50,8 +47,7 @@
         "force_recovery": true,
         "history_size": 10,
         "history_ttl": "300s",
-        "allow_subscribe_for_client": false,
-        "proxy_subscribe": true
+        "subscribe_proxy_enabled": true
       }
     ]
   }
