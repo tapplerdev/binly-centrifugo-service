@@ -27,6 +27,12 @@
         "timeout": "5s"
       }
     },
+    "proxy_static": {
+      "location_publish": {
+        "endpoint": "https://ropacal-backend-production.up.railway.app/api/centrifugo/publish-location",
+        "timeout": "2s"
+      }
+    },
     "namespaces": [
       {
         "name": "driver",
@@ -37,6 +43,7 @@
         "history_ttl": "300s",
         "subscribe_proxy_enabled": true,
         "publish_proxy_enabled": true,
+        "publish_proxy_name": "location_publish",
         "allow_publish_for_client": true
       },
       {
