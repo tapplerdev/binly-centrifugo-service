@@ -6,6 +6,7 @@
     "allowed_origins": ["*"]
   },
   "http_api": {
+    "enabled": true,
     "key": "edbe666f2fc6596a951ae6fac954e5fb6be4440b8d7cbe3f8bbe6419f7f5ecda"
   },
   "admin": {
