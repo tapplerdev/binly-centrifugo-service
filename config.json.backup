@@ -1,17 +1,18 @@
 {
   "client": {
     "token": {
-      "hmac_secret_key": "ln6thWwgHykwjkjXl-BIHPh4_b77yyCeJHey_2_kFR2wP2C3AkmyVhrUFERxdEojzwLq-3JeM-z9to4GdBpEzg"
+      "hmac_secret_key": "828527f9bffda8a1d8ba2db6d47549b0d6453c7c6340e2a70358bcbfea9db615"
     },
     "allowed_origins": ["*"]
+  },
+  "http_api": {
+    "enabled": true,
+    "key": "edbe666f2fc6596a951ae6fac954e5fb6be4440b8d7cbe3f8bbe6419f7f5ecda"
   },
   "admin": {
     "enabled": true,
     "password": "YourStrongPassword123!",
-    "secret": "J0fKyRxYwzRch36UnPT14j6QGLrrdsJr1LUxt_Wn_JooS7XqiwcmKcD31EZH8mA2dQp9Q4w0-WmBiqZGQikb1Q"
-  },
-  "http_api": {
-    "key": "QXrxZCAL-g8U3hf-PQ-eR_v0JrSxfLPgibOt5jE3HzeQoOzZAkuFIDHuqGMo29W4BzQ3VXPNxxW8uv21jyow6w"
+    "secret": "937d9c4fd61eda5bc8359b60db93a97e"
   },
   "health": {
     "enabled": true
@@ -20,10 +21,6 @@
     "proxy": {
       "subscribe": {
         "endpoint": "https://ropacal-backend-production.up.railway.app/api/centrifugo/subscribe",
-        "timeout": "5s"
-      },
-      "publish": {
-        "endpoint": "https://ropacal-backend-production.up.railway.app/api/centrifugo/publish",
         "timeout": "5s"
       }
     },
@@ -35,9 +32,7 @@
         "force_recovery_mode": "cache",
         "history_size": 10,
         "history_ttl": "300s",
-        "subscribe_proxy_enabled": true,
-        "publish_proxy_enabled": true,
-        "allow_publish_for_client": true
+        "subscribe_proxy_enabled": true
       },
       {
         "name": "shift",

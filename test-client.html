@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Centrifugo Test Client</title>
+    <style>
+        body {
+            font-family: monospace;
+            padding: 20px;
+            background: #1e1e1e;
+            color: #d4d4d4;
+        }
+        #messages {
+            background: #2d2d2d;
+            padding: 10px;
+            border-radius: 5px;
+            min-height: 300px;
+            max-height: 600px;
+            overflow-y: auto;
+        }
+        .message {
+            padding: 8px;
+            margin: 5px 0;
+            background: #3c3c3c;
+            border-left: 3px solid #4ec9b0;
+            border-radius: 3px;
+        }
+        .status {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+        .connected { background: #0e639c; }
+        .disconnected { background: #f48771; }
+        h1 { color: #4ec9b0; }
+        h2 { color: #dcdcaa; }
+    </style>
+</head>
+<body>
+    <h1>🔴 Centrifugo Test Client</h1>
+    <div id="status" class="status disconnected">⚫ Disconnected</div>
+
+    <h2>📡 Messages:</h2>
+    <div id="messages"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/centrifuge@5/dist/centrifuge.js"></script>
+    <script>
+        const statusEl = document.getElementById('status');
+        const messagesEl = document.getElementById('messages');
+
+        // Configuration
+        const CENTRIFUGO_URL = 'wss://binly-centrifugo-service-production.up.railway.app/connection/websocket';
+        const DRIVER_ID = '15fadf19-5c7f-4553-badc-7845f867b08c';
+        const CHANNEL = `driver:location:${DRIVER_ID}`;
+
+        // For testing, we'll generate a simple JWT token
+        // In production, you'd get this from your backend /api/centrifugo/token endpoint
+        const TOKEN_SECRET = 'ln6thWwgHykwjkjXl-BIHPh4_b77yyCeJHey_2_kFR2wP2C3AkmyVhrUFERxdEojzwLq-3JeM-z9to4GdBpEzg';
+
+        function log(message, data) {
+            const div = document.createElement('div');
+            div.className = 'message';
+            div.innerHTML = `
+                <strong>${new Date().toISOString()}</strong><br>
+                ${message}<br>
+                ${data ? `<pre>${JSON.stringify(data, null, 2)}</pre>` : ''}
+            `;
+            messagesEl.insertBefore(div, messagesEl.firstChild);
+        }
+
+        // Token from /api/centrifugo/token
+        async function getToken() {
+            return 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NzAzMTIwNDYsImlhdCI6MTc3MDIyNTY0NiwiaW5mbyI6eyJ1c2VyX2lkIjoiZTVhNmQzNzEtNDM2YS00MjA5LWIxNDgtNGMxZTlhNTY3ZmU4In0sInN1YiI6ImU1YTZkMzcxLTQzNmEtNDIwOS1iMTQ4LTRjMWU5YTU2N2ZlOCJ9.RYLjEHFABh4xxcjatKD4jE-OXmgOE2KMUIU9us-Hms8';
+        }
+
+        async function connect() {
+            log('🔌 Attempting to connect to Centrifugo...', { url: CENTRIFUGO_URL, channel: CHANNEL });
+
+            const token = await getToken();
+
+            const centrifuge = new Centrifuge(CENTRIFUGO_URL, {
+                token: token,
+                debug: true
+            });
+
+            centrifuge.on('connecting', (ctx) => {
+                statusEl.innerHTML = '🟡 Connecting...';
+                statusEl.className = 'status disconnected';
+                log('🟡 Connecting...', ctx);
+            });
+
+            centrifuge.on('connected', (ctx) => {
+                statusEl.innerHTML = '🟢 Connected!';
+                statusEl.className = 'status connected';
+                log('✅ Connected to Centrifugo!', ctx);
+            });
+
+            centrifuge.on('disconnected', (ctx) => {
+                statusEl.innerHTML = '⚫ Disconnected';
+                statusEl.className = 'status disconnected';
+                log('❌ Disconnected', ctx);
+            });
+
+            centrifuge.on('error', (ctx) => {
+                log('⚠️ Error', ctx);
+            });
+
+            // Subscribe to channel
+            const sub = centrifuge.newSubscription(CHANNEL);
+
+            sub.on('publication', (ctx) => {
+                log('📍 NEW LOCATION UPDATE!', ctx.data);
+            });
+
+            sub.on('subscribing', (ctx) => {
+                log('🔄 Subscribing to channel...', { channel: CHANNEL });
+            });
+
+            sub.on('subscribed', (ctx) => {
+                log('✅ Subscribed to channel!', { channel: CHANNEL });
+            });
+
+            sub.on('unsubscribed', (ctx) => {
+                log('❌ Unsubscribed from channel', ctx);
+            });
+
+            sub.subscribe();
+            centrifuge.connect();
+        }
+
+        // Auto-connect on page load
+        connect();
+
+        log('🚀 Test client initialized', {
+            driver_id: DRIVER_ID,
+            channel: CHANNEL,
+            note: 'This will fail without a valid JWT token. Get token from /api/centrifugo/token first!'
+        });
+    </script>
+</body>
+</html>
