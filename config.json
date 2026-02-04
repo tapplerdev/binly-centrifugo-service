@@ -1,5 +1,18 @@
 {
-  "admin": true,
+  "client": {
+    "token": {
+      "hmac_secret_key": "828527f9bffda8a1d8ba2db6d47549b0d6453c7c6340e2a70358bcbfea9db615"
+    },
+    "allowed_origins": ["*"]
+  },
+  "http_api": {
+    "key": "edbe666f2fc6596a951ae6fac954e5fb6be4440b8d7cbe3f8bbe6419f7f5ecda"
+  },
+  "admin": {
+    "password": "YourStrongPassword123!",
+    "secret": "937d9c4fd61eda5bc8359b60db93a97e",
+    "enabled": true
+  },
   "health": true,
   "proxy_subscribe_endpoint": "https://ropacal-backend-production.up.railway.app/api/centrifugo/subscribe",
   "proxy_subscribe_timeout": "5s",
