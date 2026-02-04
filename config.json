@@ -9,32 +9,23 @@
     {
       "name": "driver",
       "presence": true,
-      "force_recovery_mode": "cache",
+      "force_recovery": true,
       "history_size": 1,
-      "history_ttl": "60s",
-      "allow_subscribe_for_client": false,
-      "subscribe_proxy_enabled": true,
-      "subscribe_proxy_endpoint": "https://ropacal-backend-production.up.railway.app/api/centrifugo/subscribe"
+      "history_ttl": "60s"
     },
     {
       "name": "shift",
       "presence": false,
-      "force_recovery_mode": "cache",
+      "force_recovery": true,
       "history_size": 5,
-      "history_ttl": "120s",
-      "allow_subscribe_for_client": false,
-      "subscribe_proxy_enabled": true,
-      "subscribe_proxy_endpoint": "https://ropacal-backend-production.up.railway.app/api/centrifugo/subscribe"
+      "history_ttl": "120s"
     },
     {
       "name": "manager",
       "presence": false,
-      "force_recovery_mode": "cache",
+      "force_recovery": true,
       "history_size": 10,
-      "history_ttl": "300s",
-      "allow_subscribe_for_client": false,
-      "subscribe_proxy_enabled": true,
-      "subscribe_proxy_endpoint": "https://ropacal-backend-production.up.railway.app/api/centrifugo/subscribe"
+      "history_ttl": "300s"
     }
   ]
 }
