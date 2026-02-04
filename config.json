@@ -22,6 +22,13 @@
   "health": {
     "enabled": true
   },
+  "proxies": [
+    {
+      "name": "location_publish",
+      "endpoint": "https://ropacal-backend-production.up.railway.app/api/centrifugo/publish-location",
+      "timeout": "3s"
+    }
+  ],
   "channel": {
     "proxy": {
       "subscribe": {
@@ -29,8 +36,8 @@
         "timeout": "5s"
       },
       "publish": {
-        "endpoint": "https://ropacal-backend-production.up.railway.app/api/centrifugo/publish-location",
-        "timeout": "3s"
+        "endpoint": "https://ropacal-backend-production.up.railway.app/api/centrifugo/publish",
+        "timeout": "5s"
       }
     },
     "namespaces": [
@@ -43,6 +50,7 @@
         "history_ttl": "300s",
         "subscribe_proxy_enabled": true,
         "publish_proxy_enabled": true,
+        "publish_proxy_name": "location_publish",
         "allow_publish_for_client": true
       },
       {
