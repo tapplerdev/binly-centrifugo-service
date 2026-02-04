@@ -1,7 +1,7 @@
 # Railway Centrifugo Deployment - Dockerfile
 # Deploys Centrifugo real-time messaging server for driver location streaming
 
-FROM centrifugo/centrifugo:v5
+FROM centrifugo/centrifugo:v6
 
 # Copy configuration file
 COPY config.json /centrifugo/config.json
