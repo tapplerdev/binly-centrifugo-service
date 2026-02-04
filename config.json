@@ -15,8 +15,8 @@
       "presence": true,
       "force_recovery": true,
       "force_recovery_mode": "cache",
-      "history_size": 1,
-      "history_ttl": "60s",
+      "history_size": 10,
+      "history_ttl": "300s",
       "allow_subscribe_for_client": false,
       "proxy_subscribe": true
     },
