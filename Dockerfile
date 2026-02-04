@@ -15,8 +15,8 @@ EXPOSE $PORT
 
 # Start Centrifugo with config file
 # Railway requires listening on 0.0.0.0 (not localhost)
-# Use shell form (not JSON array) so $PORT expands correctly
-CMD centrifugo --config=/centrifugo/config.json --port=${PORT:-8000}
+# In v6, use --http_server.port instead of --port
+CMD centrifugo --config=/centrifugo/config.json --http_server.port=${PORT:-8000}
 
 # Image size: ~50MB (much smaller than OSRM!)
 # RAM usage: ~100-200MB at runtime
